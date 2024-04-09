@@ -1,36 +1,20 @@
 package PizzaOrder;
 
-class Main {
-    public static void main(String[] args) {
-        PizzaOrder pizza = new PizzaOrder("Сырная", PizzaSize.BIG, true, "Пушкинская 6");
-        PizzaOrder pizza1 = new PizzaOrder("Аль-Капчоне", PizzaSize.SMALL, true, "Ярославская 101");
-        PizzaOrder pizza2 = new PizzaOrder("Острячок", PizzaSize.MEDIUM, false, "Презедентская 5");
+enum PizzaSize {
+    SMALL("Маленький"),
+    MEDIUM("Средний"),
+    BIG("Большой");
+    private String description;
 
-        System.out.println("Информация о заказе:");
-        System.out.println(pizza);
-        System.out.println(pizza1);
-        System.out.println("-------------------------------------------------");
+    PizzaSize(String description) {
+        this.description = description;
+    }
 
-        System.out.println("Размещаем заказ:");
-        pizza.order();
-        pizza.order();
-        pizza1.order();
-        System.out.println("-------------------------------------------------");
-
-        System.out.println("Отменяем заказ:");
-        pizza.cansel();
-        pizza1.cansel();
-        pizza2.cansel();
-
-
+    public String getDescription() {
+        return description;
     }
 }
 
-enum PizzaSize {
-    SMALL,
-    MEDIUM,
-    BIG
-}
 public class PizzaOrder {
     private String name;
     private PizzaSize size;
@@ -43,26 +27,6 @@ public class PizzaOrder {
         this.size = size;
         this.isSauce = isSauce;
         this.adress = adress;
-    }
-
-    public void order() {
-        if (!isAccepted) {
-            isAccepted = true;
-            System.out.println("Заказ принят. \n\t" + getSize() + " пицца '" + name + "' " +
-                    (isSauce ? "с соусом" : "без соуса") + " на адрес " + adress + ".");
-        } else {
-            System.out.println("\tЗаказ уже принят.");
-        }
-
-    }
-
-    public void cansel() {
-        if (isAccepted) {
-            isAccepted = false;
-            System.out.println("\tЗаказ по адресу '" + adress + "' был отменен.");
-        } else {
-            System.out.println("\tЗаказ по адресу '" + adress + "' не был принят.");
-        }
     }
 
     public String getName() {
@@ -89,6 +53,26 @@ public class PizzaOrder {
         this.adress = adress;
     }
 
+    public void order() {
+        if (!isAccepted) {
+            isAccepted = true;
+            System.out.println("Заказ принят. \n\t" + getSize(size) + " пицца '" + name + "' " +
+                    (isSauce ? "с соусом" : "без соуса") + " на адрес " + adress + ".");
+        } else {
+            System.out.println("\tЗаказ уже принят.");
+        }
+
+    }
+
+    public void cancellation() {
+        if (isAccepted) {
+            isAccepted = false;
+            System.out.println("\tЗаказ по адресу '" + adress + "' был отменен.");
+        } else {
+            System.out.println("\tЗаказ по адресу '" + adress + "' не был принят.");
+        }
+    }
+
     @Override
     public String toString() {
         return "Заказ:" +
@@ -99,21 +83,10 @@ public class PizzaOrder {
                 "\n\tвыполнеие - " + isAccepted;
     }
 
-    private String getSize() {
-        switch (size) {
-            case SMALL -> {
-                return "Маленькая";
-            }
-            case MEDIUM -> {
-                return "Средняя";
-            }
-            case BIG -> {
-                return "Большая";
-            }
-            default -> {
-                return "";
-            }
-        }
+    public String getSize(PizzaSize size) {
+        return size.getDescription();
     }
+
+
 }
 
