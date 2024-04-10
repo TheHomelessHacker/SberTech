@@ -11,6 +11,7 @@
     <modules>
         <module>base</module>
         <module>OOP</module>
+3        <module>UnitTest</module>
     </modules>
 
     <properties>
