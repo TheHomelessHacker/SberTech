@@ -9,9 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>base</module>
-        <module>OOP</module>
-3        <module>UnitTest</module>
+        <module>UnitTest</module>
     </modules>
 
     <properties>

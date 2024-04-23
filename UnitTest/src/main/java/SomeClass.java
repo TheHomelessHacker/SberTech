@@ -1,8 +1,11 @@
+import org.mockito.Mockito;
+
 public class SomeClass {
 
     public static void main(String[] args) {
-        A a1 = new A();
-        a1.methodWithException(-1);
+        secondClass mockB = Mockito.mock(secondClass.class);
+        firstClass a1 = new firstClass(mockB);
+        a1.methodWithException(0);
     }
 
     private String privateMethod(){
@@ -15,20 +18,20 @@ public class SomeClass {
 
 }
 
-class A {
-    public A(B mockB) {
+class firstClass {
+    public firstClass(secondClass mockB) {
     }
 
-    public A() {
+    public firstClass() {
     }
 
-    public void methodA() {
+    public void callMethodA() {
         System.out.println("Вызван метод A");
     }
 
-    public void callMethodB(B b) {
+    public void callMethodB(secondClass secondclass) {
         System.out.println("Вызов метода B из A");
-        b.methodB();
+        secondclass.callMethodB();
     }
 
     public void methodWithException(int value) {
@@ -39,22 +42,24 @@ class A {
         }
     }
 
+
+
 }
 
-class B {
-    public B(A mockA) {
+class secondClass {
+    public secondClass(firstClass mockA) {
     }
 
-    public B() {
+    public secondClass() {
     }
 
-    public void methodB() {
+    public void callMethodB() {
         System.out.println("Вызов метода B");
     }
 
-    public void callMethodA(A a) {
+    public void callMethodA(firstClass firstclass) {
         System.out.println("Вызов метода A из B");
-        a.methodA();
+        firstclass.callMethodA();
     }
 }
 
