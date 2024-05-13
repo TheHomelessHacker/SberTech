@@ -11,6 +11,7 @@
     <modules>
         <module>UnitTest</module>
         <module>Generics</module>
+        <module>Exeption</module>
     </modules>
 
     <properties>
